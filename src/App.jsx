@@ -5,6 +5,8 @@ import SignupPage from './components/SignupPage';
 import Dashboard from './components/Dashboard';
 import AttendancePage from './components/AttendancePage';
 import WelcomePage from './components/Welcomepage';
+import SelectClass from './components/SelectClass';
+import ClassDetails from './components/ClassDetails';
 function App() {
  return (
     <Router>
@@ -14,6 +16,8 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/attendance" element={<AttendancePage />} />
+        <Route path="/select-class" element={<SelectClass />} /> 
+        <Route path="/class" element={<ClassDetails />} /> 
         {/* Add other routes as needed */}
       </Routes>
     </Router>

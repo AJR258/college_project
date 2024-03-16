@@ -1,4 +1,3 @@
-// src/components/AttendancePage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,11 +19,33 @@ const AttendancePage = () => {
     setPhoto(e.target.files[0]);
  };
 
- const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Class:', selectedClass, 'Period:', period, 'Photo:', photo);
- };
+    const formData = new FormData();
+    formData.append('video', photo);
+    formData.append('class_name', selectedClass);
+    formData.append('period', period);
+
+    try {
+      const response = await fetch('http://localhost:8000/process_video/', {
+        method: 'POST',
+        body: formData,
+      });
+
+      console.log('Response:', response);
+
+      // Check if response is OK
+      if (response.ok) {
+        const data = await response.json(); // Parse JSON data from response
+        console.log('Video processed successfully:', data);
+      } else {
+        // If response is not OK, log the error message
+        console.error('Video processing failed:', await response.text());
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+};
 
  const handleHomeRedirect = () => {
     navigate('/dashboard');

@@ -3,31 +3,31 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
- const navigate = useNavigate();
- const [showConfirm, setShowConfirm] = useState(false);
+  const navigate = useNavigate();
+  const [showConfirm, setShowConfirm] = useState(false);
 
- const handleViewClass = () => {
+  const handleViewClass = () => {
     navigate('/class');
- };
+  };
 
- const handleTakeAttendance = () => {
+  const handleTakeAttendance = () => {
     navigate('/attendance');
- };
+  };
 
- const handleLogout = () => {
+  const handleLogout = () => {
     setShowConfirm(true);
- };
+  };
 
- const confirmLogout = () => {
+  const confirmLogout = () => {
     setShowConfirm(false);
     navigate('/login');
- };
+  };
 
- const cancelLogout = () => {
+  const cancelLogout = () => {
     setShowConfirm(false);
- };
+  };
 
- return (
+  return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="absolute top-0 right-0 m-4">
         <button
@@ -38,9 +38,7 @@ const Dashboard = () => {
         </button>
       </div>
       <div className="max-w-md w-full space-y-8">
-        <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Dashboard
-        </h2>
+        <h2 className="text-center text-3xl font-extrabold text-gray-900">Dashboard</h2>
         <div className="flex justify-center space-x-4">
           <button
             onClick={handleViewClass}
@@ -78,7 +76,7 @@ const Dashboard = () => {
         </div>
       )}
     </div>
- );
+  );
 };
 
 export default Dashboard;
