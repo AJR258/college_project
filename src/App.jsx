@@ -4,10 +4,12 @@ import LoginPage from './components/Loginpage';
 import SignupPage from './components/SignupPage';
 import Dashboard from './components/Dashboard';
 import AttendancePage from './components/AttendancePage';
+import WelcomePage from './components/Welcomepage';
 function App() {
  return (
     <Router>
       <Routes>
+      <Route path="/" element={<WelcomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
