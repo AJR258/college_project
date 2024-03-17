@@ -12,10 +12,10 @@ const SelectClass = () => {
 
  const handleSubmit = async () => {
     try {
-        const response = await fetch('http://localhost:8000/select_class', {
+        const response = await fetch('http://localhost:8000/view_class/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'json'
             },
             body: JSON.stringify({ class_name: selectedClass })
         });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; 
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -9,10 +9,9 @@ const LoginPage = () => {
         e.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        const email = document.getElementById('email').value; // Capture email value
-
+        const email = document.getElementById('email').value; 
         try {
-            const response = await axios.post('http://localhost:8000/login/', {username, password, email}); // Include email in the request payload
+            const response = await axios.post('http://localhost:8000/login/', {username, password, email}); 
             if (response.status === 200) {
                 navigate('/dashboard');
             } else {

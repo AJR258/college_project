@@ -1,55 +1,56 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import axios
 
 const AttendancePage = () => {
- const navigate = useNavigate();
- const [selectedClass, setSelectedClass] = useState('');
- const [period, setPeriod] = useState('');
- const [photo, setPhoto] = useState(null);
+    const navigate = useNavigate();
+    const [selectedClass, setSelectedClass] = useState('');
+    const [period, setPeriod] = useState('');
+    const [photo, setPhoto] = useState(null);
 
- const handleClassChange = (e) => {
-    setSelectedClass(e.target.value);
- };
+    const handleClassChange = (e) => {
+        setSelectedClass(e.target.value);
+    };
 
- const handlePeriodChange = (e) => {
-    setPeriod(e.target.value);
- };
+    const handlePeriodChange = (e) => {
+        setPeriod(e.target.value);
+    };
 
- const handlePhotoUpload = (e) => {
-    setPhoto(e.target.files[0]);
- };
+    const handlePhotoUpload = (e) => {
+        setPhoto(e.target.files[0]);
+    };
 
- const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('video', photo);
-    formData.append('class_name', selectedClass);
-    formData.append('period', period);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('video', photo);
+        formData.append('class_name', selectedClass);
+        formData.append('period', period);
 
-    try {
-      const response = await fetch('http://localhost:8000/process_video/', {
-        method: 'POST',
-        body: formData,
-      });
+        try {
+            const response = await axios.post('http://localhost:8000/process_video/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
 
-      console.log('Response:', response);
+            console.log('Response:', response);
 
-      // Check if response is OK
-      if (response.ok) {
-        const data = await response.json(); // Parse JSON data from response
-        console.log('Video processed successfully:', data);
-      } else {
-        // If response is not OK, log the error message
-        console.error('Video processing failed:', await response.text());
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-};
+            // Check if response is OK
+            if (response.status === 200) {
+                console.log('Video processed successfully:', response.data);
+            } else {
+                // If response is not OK, log the error message
+                console.error('Video processing failed:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
- const handleHomeRedirect = () => {
-    navigate('/dashboard');
- };
+    const handleHomeRedirect = () => {
+        navigate('/dashboard');
+    };
 
  return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -78,7 +79,7 @@ const AttendancePage = () => {
               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="">Select a class</option>
-              <option value="cse2k20">CSE 2K20</option>
+              <option value="cse_2k20">cse_2k20</option>
               <option value="me2k20">ME 2K20</option>
               <option value="eca2k20">ECA 2K20</option>
               <option value="ce2k20">CE 2K20</option>
